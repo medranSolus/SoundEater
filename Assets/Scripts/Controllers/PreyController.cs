@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class PreyController : MonoBehaviour
@@ -16,13 +14,12 @@ public class PreyController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         lastPosition = transform.position;
-
     }
 
     private void Update()
     {
         float distance = Vector3.Distance(transform.position, Player.transform.position);
-        Debug.Log("Distance: " + distance);
+        //Debug.Log("Distance: " + distance);
 
 
         if(distance < EnemyDistanceRun)
@@ -37,6 +34,7 @@ public class PreyController : MonoBehaviour
             lastPosition = transform.position;
         }
     }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
