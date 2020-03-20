@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class PreyControllerWaypoints : MonoBehaviour
@@ -29,7 +27,7 @@ public class PreyControllerWaypoints : MonoBehaviour
         if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
         {
             GotoNextPoint();
-            Debug.Log("Going to the next point");
+            //Debug.Log("Going to the next point");
         }
 
         if (monsterFootstepSource && (transform.position - lastPosition).magnitude > 3)
@@ -44,11 +42,11 @@ public class PreyControllerWaypoints : MonoBehaviour
         // Returns if no points have been set up
         if (points.Length == 0)
         {
-            Debug.Log("No points ");
+            //Debug.Log("No points ");
         }
         // Set the agent to go to the currently selected destination.
         _agent.destination = points[destPoint].position;
-        Debug.Log("Going to " + points[destPoint].name);
+        //Debug.Log("Going to " + points[destPoint].name);
 
         // Choose the next point in the array as the destination,
         // cycling to the start if necessary.

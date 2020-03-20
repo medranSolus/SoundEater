@@ -11,13 +11,6 @@ public class CameraMovement : MonoBehaviour
     [Range(275.0f, 355.0f)]
     float minLookUp = 280.0f;
 
-    GameObject playerAvatar;
-
-    void Start()
-    {
-        playerAvatar = GameObject.Find("Player Avatar");
-    }
-
     void Update()
     {
         transform.Rotate(new Vector3(
@@ -30,12 +23,5 @@ public class CameraMovement : MonoBehaviour
                 Mathf.Clamp(transform.rotation.eulerAngles.x, minLookUp, 360.0f),
             transform.rotation.eulerAngles.y,
             0.0f);
-    }
-
-    void LateUpdate()
-    {
-        transform.position = Vector3.MoveTowards(transform.position,
-            playerAvatar.transform.position + Vector3.up,
-            100.0f * Time.deltaTime);
     }
 }
