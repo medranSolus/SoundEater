@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class PreyController : MonoBehaviour
 {
     private NavMeshAgent _agent;
-    public GameObject Player;
+    private GameObject Player;
     public float EnemyDistanceRun = 4.0f;
     [SerializeField]
     AudioSource monsterFootstepSource;
@@ -14,6 +14,8 @@ public class PreyController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         lastPosition = transform.position;
+        if (Player == null)
+            Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
