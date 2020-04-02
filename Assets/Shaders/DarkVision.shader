@@ -227,7 +227,7 @@
     }
 
         HLSLINCLUDE
-#define DARK_VISION_CUT_LENGTH 6.0f
+#define DARK_VISION_CUT_LENGTH 5.5f
 #pragma target 4.5
 #pragma only_renderers d3d11 ps4 xboxone vulkan metal switch
 
