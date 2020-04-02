@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Characters")]
     public GameObject PlayerPrefab;
     // TO-DO
     // Zmienic z GameObject na klase ofiary (punkty zycia, czy zjedzony itp.)
     public GameObject PreyPrefab;
 
+    [Header("Game Settings")]
     public int AmountOfPrey;
     public float RoundTimeInSeconds;
 
@@ -18,7 +20,7 @@ public class GameManager : MonoBehaviour
     private GameObject spawnedPlayer;
     private List<GameObject> spawnedPrey;
     private List<GameObject> leftSpawnPoints;
-    public float roundTime;
+    private float roundTime;
 
     // Start is called before the first frame update
     void Start()
