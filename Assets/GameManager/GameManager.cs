@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
         if(roundTime >= RoundTimeInSeconds)
         {
-            Debug.Log("End of the round! We loose.");
+            Debug.Log("End of the round! We lost.");
         }
 
         // TO-DO
