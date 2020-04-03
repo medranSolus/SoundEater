@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     // Private variables to watch over game progress
     private GameObject spawnedPlayer;
-    private List<GameObject> spawnedPrey;
+    private List<GameObject> spawnedPrey = new List<GameObject>();
     private List<GameObject> leftSpawnPoints;
     private float roundTime;
 
@@ -54,7 +54,8 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < AmountOfPrey; i++)
         {
             randomIndex = Random.Range(0, leftSpawnPoints.Count);
-            spawnedPrey.Add(Instantiate(PreyPrefab, leftSpawnPoints[randomIndex].transform));
+            GameObject Prey = Instantiate(PreyPrefab, leftSpawnPoints[randomIndex].transform);
+            spawnedPrey.Add(Prey);
             leftSpawnPoints.RemoveAt(randomIndex);
         }
 
