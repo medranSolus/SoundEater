@@ -8,6 +8,7 @@ public class PreyControllerWaypoints : MonoBehaviour
     private GameObject[] waypoints; // array of waypoints
     private int destPoint = 0;
     private bool runningAway; // if 0 - go to the waypoint, 1 - run from the player
+    public GameManager gameManager;
 
     public float EnemyDistanceRun = 4.0f; // distance describing when to run from the player
     [SerializeField]
@@ -68,7 +69,24 @@ public class PreyControllerWaypoints : MonoBehaviour
             monsterFootstepSource.Play();
             lastPosition = transform.position;
         }
+        
+
+
     }
+
+    // On collision the object this script is attached to
+    // is removed from the gameManager's list and destroyed
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Collided with Player");
+            gameManager.DeletePreyFromList(gameObject);
+            Destroy(gameObject);
+            
+        }
+    }
+
 
     void GotoNextPoint()
     {
