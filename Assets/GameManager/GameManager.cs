@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
             randomIndex = Random.Range(0, leftSpawnPoints.Count);
             GameObject Prey = Instantiate(PreyPrefab, leftSpawnPoints[randomIndex].transform);
             spawnedPrey.Add(Prey);
+            Prey.GetComponent<PreyControllerWaypoints>().gameManager = this; // passing reference to this gameManager to the spawned prey
             leftSpawnPoints.RemoveAt(randomIndex);
         }
 
@@ -72,8 +73,16 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("End of the round! We lost.");
         }
+        
+    }
 
-        // TO-DO
-        // Dodac kontrole zjedzonych ofiar
+    // Function is called by destroyed prey to remove it from the list
+    // Also checks if that was the last enemy
+    public void DeletePreyFromList(GameObject prey)
+    {
+        if(spawnedPrey.Remove(prey))
+            Debug.Log("Removed prey");
+        if (spawnedPrey.Count == 0)
+            Debug.Log("All enemies are dead! We win.");
     }
 }
