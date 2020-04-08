@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     float lowJumpFallSpeed = 3.0f;
     [SerializeField]
     float jumpSpeed = 5.0f;
+    [SerializeField]
+    float strafeScale = Mathf.Sqrt(3.0f);
 
     GameObject playerCamera;
     Rigidbody playerBody;
@@ -33,7 +35,14 @@ public class PlayerMovement : MonoBehaviour
             Vector3 forward = playerCamera.transform.forward;
             forward.y = 0.0f;
             forward.Normalize();
-            playerBody.velocity = moveSpeed * (Input.GetAxis("Vertical") * forward + Input.GetAxis("Horizontal") * (Quaternion.AngleAxis(90, Vector3.up) * forward));
+            float velocityForward = Input.GetAxis("Vertical");
+            float velocitySide = Input.GetAxis("Horizontal");
+            float velocityScale = Mathf.Abs(velocityForward) + Mathf.Abs(velocitySide);
+            if (velocityScale == 0.0f)
+                velocityScale = 1.0f;
+            else
+                velocityScale /= strafeScale;
+            playerBody.velocity = moveSpeed * (velocityForward * forward + velocitySide / velocityScale * (Quaternion.AngleAxis(90, Vector3.up) * forward));
 
             if (Input.GetAxis("Jump") > 0.0f)
                 playerBody.velocity += Vector3.up * jumpSpeed;
