@@ -12,7 +12,7 @@ public class PreyControllerWaypoints : MonoBehaviour
 
     public float EnemyDistanceRun = 4.0f; // distance describing when to run from the player
     [SerializeField]
-    AudioSource monsterFootstepSource;
+    AudioSource monsterFootstepSource = null;
     Vector3 lastPosition;
     private void Start()
     {
