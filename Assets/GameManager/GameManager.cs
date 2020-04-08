@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,55 +22,16 @@ public class GameManager : MonoBehaviour
     // Private variables to watch over game progress
     private GameObject spawnedPlayer;
     private List<GameObject> spawnedPrey = new List<GameObject>();
-    private List<GameObject> leftSpawnPoints;
-    private float roundTime;
-    private int currentScore;
-    private bool isGame = false;
+
+    private List<GameObject> leftSpawnPoints = new List<GameObject>();
+    private float roundTime = 0;
+    private int currentScore = 0;
+    private bool gameEnded = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(SpawnPositions.Count < AmountOfPrey + 1 && SpawnPositions.Count > 1)
-        {
-            Debug.LogWarning("Not enough spawn points for every prey. Spawning less...");
-            AmountOfPrey = SpawnPositions.Count - 1;
-        }
-
-        if(SpawnPositions.Count == 1)
-        {
-            Debug.LogWarning("No spawn points left for prey.");
-            AmountOfPrey = 0;
-        }
-
-        if(SpawnPositions.Count == 0)
-        {
-            Debug.LogError("No spawn points!");
-            return;
-        }
-
-        leftSpawnPoints = SpawnPositions;
-
-        // Spawn player
-        int randomIndex = Random.Range(0, leftSpawnPoints.Count);
-        spawnedPlayer = Instantiate(PlayerPrefab, leftSpawnPoints[randomIndex].transform);
-        leftSpawnPoints.RemoveAt(randomIndex);
-
-        // Spawn prey
-        for(int i = 0; i < AmountOfPrey; i++)
-        {
-            randomIndex = Random.Range(0, leftSpawnPoints.Count);
-            GameObject Prey = Instantiate(PreyPrefab, leftSpawnPoints[randomIndex].transform);
-            spawnedPrey.Add(Prey);
-            Prey.GetComponent<PreyControllerWaypoints>().gameManager = this; // passing reference to this gameManager to the spawned prey
-            leftSpawnPoints.RemoveAt(randomIndex);
-        }
-
-        // TODO: When main menu is finished remove it from here
-        StartGame();
-
-        // Set variables
-        roundTime = 0;
-        currentScore = 0;
+        RestartGame();
     }
 
     // Update is called once per frame
@@ -77,19 +39,82 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(pauseMenuKey))
         {
-            if (isGame)
+            if (!gameEnded)
                 PauseGame();
             else
                 StartGame();
         }
-        if (isGame)
+        if (!gameEnded)
         {
             roundTime += Time.deltaTime;
 
             if (roundTime >= RoundTimeInSeconds)
             {
                 Debug.Log("End of the round! We lost Mr. Stark...");
+                EndGame();
             }
+        }
+    }
+
+    // Go through a procedure of restaring the game
+    public void RestartGame()
+    {
+        if (!VailidateSpawnPoints())
+            return;
+
+        leftSpawnPoints = new List<GameObject>(SpawnPositions);
+        roundTime = 0;
+        currentScore = 0;
+        gameEnded = false;
+
+        SpawnPlayer();
+        SpawnPrey();
+
+        // TODO: When main menu is finished remove it from here
+        StartGame();
+    }
+
+    // Validate amount of spawn points
+    bool VailidateSpawnPoints()
+    {
+        if (SpawnPositions.Count < AmountOfPrey + 1 && SpawnPositions.Count > 1)
+        {
+            Debug.LogWarning("Not enough spawn points for every prey. Spawning less...");
+            AmountOfPrey = SpawnPositions.Count - 1;
+        }
+
+        if (SpawnPositions.Count == 1)
+        {
+            Debug.LogWarning("No spawn points left for prey. Spawning just a player...");
+            AmountOfPrey = 0;
+        }
+
+        if (SpawnPositions.Count == 0)
+        {
+            Debug.LogError("No spawn points!");
+            return false;
+        }
+
+        return true;
+    }
+
+    // Spawn player
+    void SpawnPlayer()
+    {
+        int randomIndex = Random.Range(0, leftSpawnPoints.Count);
+        spawnedPlayer = Instantiate(PlayerPrefab, leftSpawnPoints[randomIndex].transform);
+        leftSpawnPoints.RemoveAt(randomIndex);
+    }
+
+    // Spawn prey
+    void SpawnPrey()
+    {
+        for (int i = 0; i < AmountOfPrey; i++)
+        {
+            int randomIndex = Random.Range(0, leftSpawnPoints.Count);
+            GameObject Prey = Instantiate(PreyPrefab, leftSpawnPoints[randomIndex].transform);
+            spawnedPrey.Add(Prey);
+            leftSpawnPoints.RemoveAt(randomIndex);
         }
     }
 
@@ -114,6 +139,16 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
     }
 
+    // Go through a procedure of stopping the game
+    public void EndGame()
+    {
+        gameEnded = true;
+        Debug.Log("- - GAME OVER - -");
+        Destroy(spawnedPlayer);
+
+        SceneManager.LoadScene(3);
+    }
+
     // Function is called by destroyed prey to remove it from the list
     // Also checks if that was the last enemy
     public void DeletePreyFromList(GameObject prey)
@@ -121,9 +156,12 @@ public class GameManager : MonoBehaviour
         // Calculate score on collision
         currentScore += (int)(RoundTimeInSeconds - roundTime);
         spawnedPrey.Remove(prey);
-        if (spawnedPrey.Count == 0)
-            Debug.Log("All enemies are dead! We win Mr. Stark!");
 
+        if (spawnedPrey.Count == 0)
+        {
+            Debug.Log("All enemies are dead! We win.");
+            EndGame();
+        }
     }
 
     public int getScore()
@@ -140,5 +178,4 @@ public class GameManager : MonoBehaviour
     {
         return spawnedPrey.Count;
     }
-
 }
