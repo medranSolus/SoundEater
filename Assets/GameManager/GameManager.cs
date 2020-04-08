@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
         PauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        isGame = true;
+        gameEnded = false;
         spawnedPlayer.GetComponentInChildren<CameraMovement>().isGame = true;
         Time.timeScale = 1.0f;
     }
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         PauseMenu.SetActive(true);
-        isGame = false;
+        gameEnded = true;
         spawnedPlayer.GetComponentInChildren<CameraMovement>().isGame = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
