@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0c341ec895e5fb14486d2c4cd2df4eb9
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gothic II - Die Nacht des Raben
+  fontNames:
+  - Gothic II - Die Nacht des Raben
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

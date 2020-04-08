@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> spawnedPrey = new List<GameObject>();
     private List<GameObject> leftSpawnPoints;
     private float roundTime;
+    private int currentScore = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -80,9 +81,22 @@ public class GameManager : MonoBehaviour
     // Also checks if that was the last enemy
     public void DeletePreyFromList(GameObject prey)
     {
-        if(spawnedPrey.Remove(prey))
-            Debug.Log("Removed prey");
+        currentScore += (int)(RoundTimeInSeconds - roundTime);
+        Debug.Log("Current score: " + currentScore);
+        spawnedPrey.Remove(prey);
         if (spawnedPrey.Count == 0)
             Debug.Log("All enemies are dead! We win.");
+        
     }
+
+    public int getScore()
+    {
+        return currentScore;
+    }
+
+    public int getTimeLeft()
+    {
+        return (int)(RoundTimeInSeconds - roundTime);
+    }
+
 }
