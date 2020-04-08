@@ -19,63 +19,97 @@ public class GameManager : MonoBehaviour
     // Private variables to watch over game progress
     private GameObject spawnedPlayer;
     private List<GameObject> spawnedPrey = new List<GameObject>();
-    private List<GameObject> leftSpawnPoints;
-    private float roundTime;
-    private int currentScore;
+    private List<GameObject> leftSpawnPoints = new List<GameObject>();
+    private float roundTime = 0;
+    private int currentScore = 0;
+    private bool gameEnded = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(SpawnPositions.Count < AmountOfPrey + 1 && SpawnPositions.Count > 1)
-        {
-            Debug.LogWarning("Not enough spawn points for every prey. Spawning less...");
-            AmountOfPrey = SpawnPositions.Count - 1;
-        }
-
-        if(SpawnPositions.Count == 1)
-        {
-            Debug.LogWarning("No spawn points left for prey.");
-            AmountOfPrey = 0;
-        }
-
-        if(SpawnPositions.Count == 0)
-        {
-            Debug.LogError("No spawn points!");
-            return;
-        }
-
-        leftSpawnPoints = SpawnPositions;
-
-        // Spawn player
-        int randomIndex = Random.Range(0, leftSpawnPoints.Count);
-        spawnedPlayer = Instantiate(PlayerPrefab, leftSpawnPoints[randomIndex].transform);
-        leftSpawnPoints.RemoveAt(randomIndex);
-
-        // Spawn prey
-        for(int i = 0; i < AmountOfPrey; i++)
-        {
-            randomIndex = Random.Range(0, leftSpawnPoints.Count);
-            GameObject Prey = Instantiate(PreyPrefab, leftSpawnPoints[randomIndex].transform);
-            spawnedPrey.Add(Prey);
-            Prey.GetComponent<PreyControllerWaypoints>().gameManager = this; // passing reference to this gameManager to the spawned prey
-            leftSpawnPoints.RemoveAt(randomIndex);
-        }
-
-        // Set variables
-        roundTime = 0;
-        currentScore = 0;
+        RestartGame();
     }
 
     // Update is called once per frame
     void Update()
     {
-        roundTime += Time.deltaTime;
-
-        if(roundTime >= RoundTimeInSeconds)
+        if (!gameEnded)
         {
-            Debug.Log("End of the round! We lost.");
+            roundTime += Time.deltaTime;
+
+            if (roundTime >= RoundTimeInSeconds)
+            {
+                Debug.Log("End of the round! We lost.");
+                EndGame();
+            }
         }
-        
+    }
+
+    // Go through a procedure of restaring the game
+    public void RestartGame()
+    {
+        if (!VailidateSpawnPoints())
+            return;
+
+        leftSpawnPoints = new List<GameObject>(SpawnPositions);
+        roundTime = 0;
+        currentScore = 0;
+        gameEnded = false;
+
+        SpawnPlayer();
+        SpawnPrey();
+    }
+
+    // Validate amount of spawn points
+    bool VailidateSpawnPoints()
+    {
+        if (SpawnPositions.Count < AmountOfPrey + 1 && SpawnPositions.Count > 1)
+        {
+            Debug.LogWarning("Not enough spawn points for every prey. Spawning less...");
+            AmountOfPrey = SpawnPositions.Count - 1;
+        }
+
+        if (SpawnPositions.Count == 1)
+        {
+            Debug.LogWarning("No spawn points left for prey. Spawning just a player...");
+            AmountOfPrey = 0;
+        }
+
+        if (SpawnPositions.Count == 0)
+        {
+            Debug.LogError("No spawn points!");
+            return false;
+        }
+
+        return true;
+    }
+
+    // Spawn player
+    void SpawnPlayer()
+    {
+        int randomIndex = Random.Range(0, leftSpawnPoints.Count);
+        spawnedPlayer = Instantiate(PlayerPrefab, leftSpawnPoints[randomIndex].transform);
+        leftSpawnPoints.RemoveAt(randomIndex);
+    }
+
+    // Spawn prey
+    void SpawnPrey()
+    {
+        for (int i = 0; i < AmountOfPrey; i++)
+        {
+            int randomIndex = Random.Range(0, leftSpawnPoints.Count);
+            GameObject Prey = Instantiate(PreyPrefab, leftSpawnPoints[randomIndex].transform);
+            spawnedPrey.Add(Prey);
+            leftSpawnPoints.RemoveAt(randomIndex);
+        }
+    }
+
+    // Go through a procedure of stopping the game
+    public void EndGame()
+    {
+        gameEnded = true;
+        Debug.Log("- - GAME OVER - -");
+        Destroy(spawnedPlayer);
     }
 
     // Function is called by destroyed prey to remove it from the list
@@ -86,8 +120,10 @@ public class GameManager : MonoBehaviour
         currentScore += (int)(RoundTimeInSeconds - roundTime);
         spawnedPrey.Remove(prey);
         if (spawnedPrey.Count == 0)
+        {
             Debug.Log("All enemies are dead! We win.");
-        
+            EndGame();
+        }
     }
 
     public int getScore()
