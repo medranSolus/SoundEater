@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -110,6 +111,8 @@ public class GameManager : MonoBehaviour
         gameEnded = true;
         Debug.Log("- - GAME OVER - -");
         Destroy(spawnedPlayer);
+
+        SceneManager.LoadScene(3);
     }
 
     // Function is called by destroyed prey to remove it from the list
