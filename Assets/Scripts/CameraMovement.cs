@@ -2,6 +2,8 @@
 
 public class CameraMovement : MonoBehaviour
 {
+    public bool isGame = false;
+
     [SerializeField]
     float sensitivity = 5.0f;
     [SerializeField]
@@ -10,35 +12,9 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     [Range(275.0f, 355.0f)]
     float minLookUp = 280.0f;
-    [SerializeField]
-    KeyCode menuCode = KeyCode.Tab;
-    bool isGame = true;
-
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
+    
     void Update()
     {
-        if (Input.GetKeyDown(menuCode))
-        {
-            if (isGame)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                Time.timeScale = 0.0f;
-                isGame = false;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                Time.timeScale = 1.0f;
-                isGame = true;
-            }
-        }
         if (isGame)
         {
             transform.Rotate(new Vector3(

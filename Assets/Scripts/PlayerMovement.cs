@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float dashInterval = 5.0f;
     [SerializeField]
-    float dashTime = 1.0f;
+    float dashTime = 0.7f;
     [SerializeField]
     float dashVelocity = 13.0f;
     [SerializeField]
