@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
         if(roundTime >= RoundTimeInSeconds)
         {
-            Debug.Log("End of the round! We lost.");
+            Debug.Log("End of the round! We lost Mr. Stark...");
         }
         
     }
@@ -86,8 +86,8 @@ public class GameManager : MonoBehaviour
         currentScore += (int)(RoundTimeInSeconds - roundTime);
         spawnedPrey.Remove(prey);
         if (spawnedPrey.Count == 0)
-            Debug.Log("All enemies are dead! We win.");
-        
+            Debug.Log("All enemies are dead! We win Mr. Stark!");
+
     }
 
     public int getScore()
