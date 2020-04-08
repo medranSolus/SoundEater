@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,8 +12,11 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     public int AmountOfPrey;
     public float RoundTimeInSeconds;
-
+    public GameObject PauseMenu;
     public List<GameObject> SpawnPositions;
+
+    [SerializeField]
+    KeyCode pauseMenuKey = KeyCode.Tab;
 
     // Private variables to watch over game progress
     private GameObject spawnedPlayer;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> leftSpawnPoints;
     private float roundTime;
     private int currentScore;
+    private bool isGame = false;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +64,9 @@ public class GameManager : MonoBehaviour
             leftSpawnPoints.RemoveAt(randomIndex);
         }
 
+        // TODO: When main menu is finished remove it from here
+        StartGame();
+
         // Set variables
         roundTime = 0;
         currentScore = 0;
@@ -69,13 +75,43 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        roundTime += Time.deltaTime;
-
-        if(roundTime >= RoundTimeInSeconds)
+        if (Input.GetKeyDown(pauseMenuKey))
         {
-            Debug.Log("End of the round! We lost Mr. Stark...");
+            if (isGame)
+                PauseGame();
+            else
+                StartGame();
         }
-        
+        if (isGame)
+        {
+            roundTime += Time.deltaTime;
+
+            if (roundTime >= RoundTimeInSeconds)
+            {
+                Debug.Log("End of the round! We lost Mr. Stark...");
+            }
+        }
+    }
+
+    // Start game when players clicks on corresponding button in main menu
+    public void StartGame()
+    {
+        PauseMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isGame = true;
+        spawnedPlayer.GetComponentInChildren<CameraMovement>().isGame = true;
+        Time.timeScale = 1.0f;
+    }
+
+    public void PauseGame()
+    {
+        PauseMenu.SetActive(true);
+        isGame = false;
+        spawnedPlayer.GetComponentInChildren<CameraMovement>().isGame = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0.0f;
     }
 
     // Function is called by destroyed prey to remove it from the list
