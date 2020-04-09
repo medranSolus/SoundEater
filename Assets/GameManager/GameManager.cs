@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> leftSpawnPoints = new List<GameObject>();
     private float roundTime = 0;
     private int currentScore = 0;
+    private bool isGame = false;
     private bool gameEnded = false;
 
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(pauseMenuKey))
         {
-            if (!gameEnded)
+            if (isGame)
                 PauseGame();
             else
                 StartGame();
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         roundTime = 0;
         currentScore = 0;
         gameEnded = false;
+        isGame = true;
 
         SpawnPlayer();
         SpawnPrey();
@@ -124,7 +126,7 @@ public class GameManager : MonoBehaviour
         PauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        gameEnded = false;
+        isGame = true;
         spawnedPlayer.GetComponentInChildren<CameraMovement>().isGame = true;
         Time.timeScale = 1.0f;
     }
@@ -132,7 +134,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         PauseMenu.SetActive(true);
-        gameEnded = true;
+        isGame = false;
         spawnedPlayer.GetComponentInChildren<CameraMovement>().isGame = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
