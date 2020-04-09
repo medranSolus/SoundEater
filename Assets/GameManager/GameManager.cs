@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
             int randomIndex = Random.Range(0, leftSpawnPoints.Count);
             GameObject Prey = Instantiate(PreyPrefab, leftSpawnPoints[randomIndex].transform);
             spawnedPrey.Add(Prey);
+            Prey.GetComponent<PreyControllerWaypoints>().gameManager = this; // passing reference to this gameManager to the spawned prey
             leftSpawnPoints.RemoveAt(randomIndex);
         }
     }
@@ -159,6 +160,8 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         gameEnded = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Debug.Log("- - GAME OVER - -");
         Destroy(spawnedPlayer);
 
