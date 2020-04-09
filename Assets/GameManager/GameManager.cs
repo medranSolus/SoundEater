@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     public int AmountOfPrey;
     public float RoundTimeInSeconds;
-    public GameObject PauseMenu;
+    public GameObject UserInterface;
     public List<GameObject> SpawnPositions;
 
     [SerializeField]
@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     private int currentScore = 0;
     private bool isGame = false;
     private bool gameEnded = false;
+    private GameObject PauseMenu;
+    private GameObject HUD;
 
     // Start is called before the first frame update
     void Start()
@@ -123,7 +125,17 @@ public class GameManager : MonoBehaviour
     // Start game when players clicks on corresponding button in main menu
     public void StartGame()
     {
+        // Search for HUD and PauseMenu in UserInterface
+        for(int i = 0; i< UserInterface.transform.childCount; i++)
+        {
+            if(UserInterface.transform.GetChild(i).gameObject.name == "HUD")
+                HUD = UserInterface.transform.GetChild(i).gameObject;
+            if (UserInterface.transform.GetChild(i).gameObject.name == "PauseMenu")
+                PauseMenu = UserInterface.transform.GetChild(i).gameObject;
+        }
+        // Disable PauseMenu and enable HUD
         PauseMenu.SetActive(false);
+        HUD.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isGame = true;
@@ -133,6 +145,8 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        // Disable HUD and enable PauseMenu
+        HUD.SetActive(false);
         PauseMenu.SetActive(true);
         isGame = false;
         spawnedPlayer.GetComponentInChildren<CameraMovement>().isGame = false;
