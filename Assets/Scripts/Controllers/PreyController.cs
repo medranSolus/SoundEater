@@ -7,7 +7,7 @@ public class PreyController : MonoBehaviour
     private GameObject Player;
     public float EnemyDistanceRun = 4.0f;
     [SerializeField]
-    AudioSource monsterFootstepSource;
+    AudioSource monsterFootstepSource = null;
     Vector3 lastPosition;
 
     private void Start()
