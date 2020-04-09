@@ -24,7 +24,7 @@ public class TimeHUD : MonoBehaviour
     // Split time into minutes and seconds
     void SetText()
     {
-        time = gameManager.getTimeLeft();
+        time = gameManager.GetTimeLeft();
         minutes = (time / 60);
         seconds = time - minutes * 60;
         timeText.text = minutes.ToString() + ":" + (seconds < 10 ? ("0" + seconds.ToString()) : seconds.ToString());

@@ -187,18 +187,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int getScore()
+    public int GetScore()
     {
         return currentScore;
     }
 
-    public int getTimeLeft()
+    public int GetTimeLeft()
     {
         return (int)(RoundTimeInSeconds - roundTime);
     }
 
-    public int getEnemiesCount()
+    public int GetEnemiesCount()
     {
         return spawnedPrey.Count;
+    }
+
+    public bool GetIsDashPossible()
+    {
+        if(isGame == false)
+        {
+            return true;
+        }
+        return spawnedPlayer.GetComponentInChildren<PlayerMovement>().isDashPossible;
     }
 }

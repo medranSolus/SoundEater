@@ -9,12 +9,12 @@ public class ScoreHUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = "Score: " + gameManager.getScore().ToString();
+        scoreText.text = "Score: " + gameManager.GetScore().ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + gameManager.getScore().ToString();
+        scoreText.text = "Score: " + gameManager.GetScore().ToString();
     }
 }

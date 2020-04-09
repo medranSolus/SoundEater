@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody playerBody;
     Vector3 lastPosition;
     bool dashEnable = false;
-    bool isDashPossible = true;
+    public bool isDashPossible = true;
     float timeSinceDash = 0.0f;
     
     void Start()

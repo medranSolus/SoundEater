@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class EnemiesCountHUD: MonoBehaviour
+public class DashHUD : MonoBehaviour
 {
     public GameManager gameManager;
-    public Text scoreText;
+    public Text dashText;
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = "Enemies left: " + gameManager.GetEnemiesCount().ToString();
+        dashText.text = "Dash: " + gameManager.GetIsDashPossible().ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Enemies left: " + gameManager.GetEnemiesCount().ToString();
+        dashText.text = "Dash: " + (gameManager.GetIsDashPossible() ? "ready" : "not ready");
     }
 }
