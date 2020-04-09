@@ -151,6 +151,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     // Function is called by destroyed prey to remove it from the list
     // Also checks if that was the last enemy
     public void DeletePreyFromList(GameObject prey)
