@@ -22,8 +22,6 @@ public class PlayerMovement : MonoBehaviour
     float dashTime = 0.7f;
     [SerializeField]
     float dashVelocity = 13.0f;
-    [SerializeField]
-    KeyCode dashKey = KeyCode.LeftShift;
 
     GameObject playerCamera;
     Rigidbody playerBody;
@@ -66,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
                     Move(ref forward);
                 }
             }
-            else if (isDashPossible && Input.GetKeyDown(dashKey))
+            else if (isDashPossible && Input.GetButtonDown("Dash"))
             {
                 playerBody.velocity += dashVelocity * forward;
                 dashEnable = true;

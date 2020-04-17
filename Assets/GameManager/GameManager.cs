@@ -16,9 +16,6 @@ public class GameManager : MonoBehaviour
     public GameObject UserInterface;
     public List<GameObject> SpawnPositions;
 
-    [SerializeField]
-    KeyCode pauseMenuKey = KeyCode.Tab;
-
     // Private variables to watch over game progress
     private GameObject spawnedPlayer;
     private List<GameObject> spawnedPrey = new List<GameObject>();
@@ -40,7 +37,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(pauseMenuKey))
+        if (Input.GetButtonDown("Pause Menu"))
         {
             if (isGame)
                 PauseGame();
