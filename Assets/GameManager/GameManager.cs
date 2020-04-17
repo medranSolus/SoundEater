@@ -183,6 +183,7 @@ public class GameManager : MonoBehaviour
         if (spawnedPrey.Count == 0)
         {
             Debug.Log("All enemies are dead! We win.");
+            isGame = false;
             EndGame();
         }
     }
