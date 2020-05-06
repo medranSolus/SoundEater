@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 
 public class PreyControllerWaypoints : MonoBehaviour
 {
@@ -9,13 +10,18 @@ public class PreyControllerWaypoints : MonoBehaviour
     private int destPoint = 0;
     private bool runningAway; // if 0 - go to the waypoint, 1 - run from the player
     public GameManager gameManager;
-
+    
     public float EnemyDistanceRun = 4.0f; // distance describing when to run from the player
     [SerializeField]
     AudioSource monsterFootstepSource = null;
+    private AudioLowPassFilter audioLowPassFilter;
     Vector3 lastPosition;
     private void Start()
     {
+        audioLowPassFilter = monsterFootstepSource.GetComponent(typeof(AudioLowPassFilter)) as AudioLowPassFilter;
+        audioLowPassFilter.cutoffFrequency = 2000;
+        audioLowPassFilter.enabled = false;
+
         _agent = GetComponent<NavMeshAgent>();
         _agent.autoBraking = false;
         runningAway = false; // default state - the mob is not running away
@@ -66,7 +72,14 @@ public class PreyControllerWaypoints : MonoBehaviour
         // footsteps
         if (monsterFootstepSource && (transform.position - lastPosition).magnitude > 3)
         {
-            monsterFootstepSource.Play();
+
+            float verticalDistance = System.Math.Abs(Player.transform.position.y - transform.position.y);
+            // if the agent is above the Player, muffle it
+            if (verticalDistance >= 2)
+                audioLowPassFilter.enabled = true;
+            else
+                audioLowPassFilter.enabled = false;
+                monsterFootstepSource.Play();
             lastPosition = transform.position;
         }
         
