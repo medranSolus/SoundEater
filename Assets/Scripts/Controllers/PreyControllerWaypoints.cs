@@ -14,6 +14,7 @@ public class PreyControllerWaypoints : MonoBehaviour
     public float EnemyDistanceRun = 4.0f; // distance describing when to run from the player
     [SerializeField]
     AudioSource monsterFootstepSource = null;
+    private StepSoundChanger soundChanger = null;
     private AudioLowPassFilter audioLowPassFilter;
     Vector3 lastPosition;
     private void Start()
@@ -21,6 +22,7 @@ public class PreyControllerWaypoints : MonoBehaviour
         audioLowPassFilter = monsterFootstepSource.GetComponent(typeof(AudioLowPassFilter)) as AudioLowPassFilter;
         audioLowPassFilter.cutoffFrequency = 2000;
         audioLowPassFilter.enabled = false;
+        soundChanger = GetComponent<StepSoundChanger>();
 
         _agent = GetComponent<NavMeshAgent>();
         _agent.autoBraking = false;
@@ -79,12 +81,11 @@ public class PreyControllerWaypoints : MonoBehaviour
                 audioLowPassFilter.enabled = true;
             else
                 audioLowPassFilter.enabled = false;
-                monsterFootstepSource.Play();
+
+            //monsterFootstepSource.Play();
+            soundChanger.PlayFootstep();
             lastPosition = transform.position;
         }
-        
-
-
     }
 
     // On collision the object this script is attached to
