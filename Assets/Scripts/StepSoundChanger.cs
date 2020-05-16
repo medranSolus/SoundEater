@@ -5,7 +5,8 @@ using UnityEngine;
 public enum SurfaceType
 {
     Metal,
-    Wood
+    Wood,
+    Concrete
 }
 
 public class StepSoundChanger : MonoBehaviour
@@ -20,6 +21,8 @@ public class StepSoundChanger : MonoBehaviour
     private List<AudioClip> metalFootsteps;
     [SerializeField]
     private List<AudioClip> woodFootsteps;
+    [SerializeField]
+    private List<AudioClip> concreteFootsteps;
 
     [Header("Current settings")]
     [SerializeField]
@@ -46,6 +49,9 @@ public class StepSoundChanger : MonoBehaviour
             case SurfaceType.Wood:
                 audioSource.clip = woodFootsteps.Count > 0 ? woodFootsteps[Random.Range(0, woodFootsteps.Count)] : defaultFootstepSound;
                 break;
+            case SurfaceType.Concrete:
+                audioSource.clip = concreteFootsteps.Count > 0 ? concreteFootsteps[Random.Range(0, concreteFootsteps.Count)] : defaultFootstepSound;
+                break;
             default:
                 audioSource.clip = defaultFootstepSound;
                 break;
@@ -63,6 +69,9 @@ public class StepSoundChanger : MonoBehaviour
                 break;
             case SurfaceType.Wood:
                 audioSource.clip = woodFootsteps.Count > 0 ? woodFootsteps[Random.Range(0, woodFootsteps.Count)] : defaultFootstepSound;
+                break;
+            case SurfaceType.Concrete:
+                audioSource.clip = concreteFootsteps.Count > 0 ? concreteFootsteps[Random.Range(0, concreteFootsteps.Count)] : defaultFootstepSound;
                 break;
             default:
                 audioSource.clip = defaultFootstepSound;
