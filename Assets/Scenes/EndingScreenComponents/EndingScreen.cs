@@ -8,7 +8,7 @@ public class EndingScreen : MonoBehaviour
     public void PlayAgain()
     {
         Debug.Log("Changing scene to id = 2");
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()

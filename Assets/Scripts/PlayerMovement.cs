@@ -4,8 +4,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     float moveSpeed = 5.0f;
-    [SerializeField]
-    AudioSource monsterFootstepSource = null;
     [Range(1.0f, 10.0f)]
     [SerializeField]
     float fallSpeed = 5.5f;
@@ -29,10 +27,13 @@ public class PlayerMovement : MonoBehaviour
     bool dashEnable = false;
     public bool isDashPossible = true;
     float timeSinceDash = 0.0f;
-    
+
+    private StepSoundChanger soundChanger = null;
+
     void Start()
     {
         playerCamera = GameObject.Find("Player Camera");
+        soundChanger = GetComponent<StepSoundChanger>();
         playerBody = GetComponent<Rigidbody>();
         lastPosition = transform.position;
     }
@@ -75,9 +76,9 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetAxis("Jump") > 0.0f)
                 playerBody.velocity += Vector3.up * jumpSpeed;
 
-            if (monsterFootstepSource && (transform.position - lastPosition).magnitude > 3)
+            if (soundChanger && (transform.position - lastPosition).magnitude > 3)
             {
-                monsterFootstepSource.Play();
+                soundChanger.PlayFootstep();
                 lastPosition = transform.position;
             }
         }
