@@ -18,7 +18,7 @@ public class MainMenuController : MonoBehaviour
         PlayerPrefs.SetFloat("MasterVolume", volume.value);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()

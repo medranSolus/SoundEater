@@ -162,7 +162,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("- - GAME OVER - -");
         Destroy(spawnedPlayer);
 
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
+    }
+
+    public void QuitToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void QuitGame()
