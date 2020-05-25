@@ -1,0 +1,251 @@
+fileFormatVersion: 2
+guid: 2d6dcd7eb63d0ad48934ee063edf10b5
+ModelImporter:
+  serializedVersion: 19300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Azulejo_Tiles_txtr
+    second: {fileID: 2100000, guid: 27e04659173a2a34cbbc324554d882af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bricks_grey_txtr
+    second: {fileID: 2100000, guid: 200b3980112629748b6db4eeed402ecf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete Base 01
+    second: {fileID: 2100000, guid: 9ae25ad4720afd94c8f2fe1ec92c57b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor_tiles_damaged_txtr
+    second: {fileID: 2100000, guid: 6b1f1c68c214bd74e92da6b95ff7de03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor_wooden_panels_txtr
+    second: {fileID: 2100000, guid: d8e6fcba8d60a084a89ab32b1f2f5ad5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_txtr
+    second: {fileID: 2100000, guid: 06df5e0db22795c4a97a982734973af6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_Floor_txtr
+    second: {fileID: 2100000, guid: 888c1e9ad5faf1747acef031a9169e48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Painted_rusty_metal_txtr
+    second: {fileID: 2100000, guid: ee5e90466d4bfb74c89221f04343f94d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rust_flooring_txtr
+    second: {fileID: 2100000, guid: 08ed162ab4ae8174c86e6231cd849782, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stucco_Wall_V11_txtr
+    second: {fileID: 2100000, guid: e4395399c361c4d44844bc5cd43f8ebd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stucco_Wall_V7_txtr
+    second: {fileID: 2100000, guid: 1d6e41e552f376e498d7b82541ca8003, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TextWall_txtr
+    second: {fileID: 2100000, guid: f9d71d6d7be66ba48bea9e40785d5cd9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood_Old_txtr
+    second: {fileID: 2100000, guid: d62a2469fda0f974cbfac33a0de5daca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dirty_wall_txtr
+    second: {fileID: 2100000, guid: 54fabbffd17ad974abb73fa59ece5cec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_rusty_txtr
+    second: {fileID: 2100000, guid: 47b248726a47d3245806403ccba7a83f, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Concrete_Base_01_Metallic
+    second: {fileID: 2800000, guid: 560ca01aeab6cc541b660c253e8f9e3e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Concrete_Base_01_Roughness
+    second: {fileID: 2800000, guid: f76ee000e4ab0fc43a863654708c905b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_AZULEJO_TILES
+    second: {fileID: 2800000, guid: 6b0408f5304f90e4f975c720be9d220d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_BRICKS_GREY
+    second: {fileID: 2800000, guid: 1fdabe1041cd0004f85693c952592290, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_DIRTY_WALL
+    second: {fileID: 2800000, guid: 5fd9788ef38a83c41818ec3d26af3da4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_FLOOR_TILES_DAMAGED
+    second: {fileID: 2800000, guid: 6148c32cb3803bc489ec2da42d73416f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_FLOOR_WOODEN_PANELS
+    second: {fileID: 2800000, guid: 5c67c5ebe5e833941ab051528380b0a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_MATERIAL
+    second: {fileID: 2800000, guid: 90e18eb2f72ba5247950906d464bb8fb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_METAL_FLOOR
+    second: {fileID: 2800000, guid: 7afa89126af6f0846870aab982ac0260, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_METAL_RUSTY
+    second: {fileID: 2800000, guid: a9c6633556e1d6947878f3ed647c830e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_RED_WALL
+    second: {fileID: 2800000, guid: ac3a75cad11d4f345b8bc4b92815e799, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_RUST_FLOORING
+    second: {fileID: 2800000, guid: a01bf94f65fa96346864564fa1362401, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_STUCCO_WALL_V11
+    second: {fileID: 2800000, guid: 86b0cba015adb7f4db883ecf304ef1eb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_STUCCO_WALL_V7
+    second: {fileID: 2800000, guid: d75a0f371582e654193eb04edcf2bcb6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TEXTURE_WOOD_OLD
+    second: {fileID: 2800000, guid: d3010d11baa8a9847a2f8aa98b938bac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: wall_texture
+    second: {fileID: 2800000, guid: 111c7c617dba0d1479c57b35a1eff5bf, type: 3}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
