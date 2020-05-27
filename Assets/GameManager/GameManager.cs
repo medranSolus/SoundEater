@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
     public int AmountOfPrey;
     public float RoundTimeInSeconds;
     public GameObject UserInterface;
-    public List<GameObject> SpawnPositions;
 
     // Private variables to watch over game progress
+    private List<GameObject> SpawnPositions = new List<GameObject>();
     private GameObject spawnedPlayer;
     private List<GameObject> spawnedPrey = new List<GameObject>();
 
@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SpawnPositions = new List<GameObject>(GameObject.FindGameObjectsWithTag("Respawn"));
+
         RestartGame();
     }
 
@@ -103,7 +105,9 @@ public class GameManager : MonoBehaviour
     void SpawnPlayer()
     {
         int randomIndex = Random.Range(0, leftSpawnPoints.Count);
-        spawnedPlayer = Instantiate(PlayerPrefab, leftSpawnPoints[randomIndex].transform);
+        spawnedPlayer = Instantiate(PlayerPrefab,
+                                    leftSpawnPoints[randomIndex].transform.position,
+                                    leftSpawnPoints[randomIndex].transform.rotation);
         leftSpawnPoints.RemoveAt(randomIndex);
     }
 
@@ -113,7 +117,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < AmountOfPrey; i++)
         {
             int randomIndex = Random.Range(0, leftSpawnPoints.Count);
-            GameObject Prey = Instantiate(PreyPrefab, leftSpawnPoints[randomIndex].transform);
+            GameObject Prey = Instantiate(PreyPrefab,
+                                          leftSpawnPoints[randomIndex].transform.position,
+                                          leftSpawnPoints[randomIndex].transform.rotation);
             spawnedPrey.Add(Prey);
             Prey.GetComponent<PreyControllerWaypoints>().gameManager = this; // passing reference to this gameManager to the spawned prey
             leftSpawnPoints.RemoveAt(randomIndex);

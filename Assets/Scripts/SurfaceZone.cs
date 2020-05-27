@@ -12,4 +12,9 @@ public class SurfaceZone : MonoBehaviour
         StepSoundChanger soundChanger = other.gameObject.GetComponent<StepSoundChanger>();
         if(soundChanger) soundChanger.SetSurfaceType(surfaceType);
     }
+
+    public SurfaceType GetSurfaceType()
+    {
+        return surfaceType;
+    }
 }
