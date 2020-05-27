@@ -4,6 +4,10 @@ using UnityEngine.Audio;
 
 public class PreyControllerWaypoints : MonoBehaviour
 {
+    // animations
+    Animator _animator;
+    const float locAnSmoothTime = .1f;
+
     private NavMeshAgent _agent;
     private GameObject Player;
     private GameObject[] waypoints; // array of waypoints
@@ -28,7 +32,10 @@ public class PreyControllerWaypoints : MonoBehaviour
         _agent.autoBraking = false;
         runningAway = false; // default state - the mob is not running away
         lastPosition = transform.position;
-        
+
+        // animations
+        _animator = GetComponentInChildren<Animator>();
+
         // search player object by tag
         if (Player == null)
             Player = GameObject.FindGameObjectWithTag("Player");
@@ -46,6 +53,10 @@ public class PreyControllerWaypoints : MonoBehaviour
 
     private void Update()
     {
+        // animations
+        float speedPercent = _agent.velocity.magnitude / _agent.speed;
+        _animator.SetFloat("speedPercent", speedPercent, locAnSmoothTime, Time.deltaTime);
+
         float distance = Vector3.Distance(transform.position, Player.transform.position);
         // check if the player is too close
         if (distance < EnemyDistanceRun)
