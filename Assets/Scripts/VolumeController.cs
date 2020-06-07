@@ -5,8 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(AudioListener))]
 public class VolumeController : MonoBehaviour
 {
+    float lastVolume = -1;
+
     void Update()
     {
-        AudioListener.volume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
+        float vol = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
+
+        if (vol != lastVolume)
+        {
+            AudioListener.volume = vol;
+            lastVolume = vol;
+        }
     }
 }
