@@ -219,4 +219,18 @@ public class GameManager : MonoBehaviour
         }
         return spawnedPlayer.GetComponentInChildren<PlayerMovement>().isDashPossible;
     }
+
+    public float GetTimeSinceDash()
+    {
+        if (isGame == false)
+            return 0;
+        return spawnedPlayer.GetComponentInChildren<PlayerMovement>().timeSinceDash;
+    }
+
+    public float GetDashInterval()
+    {
+        if (isGame == false)
+            return 0;
+        return spawnedPlayer.GetComponentInChildren<PlayerMovement>().dashInterval;
+    }
 }
