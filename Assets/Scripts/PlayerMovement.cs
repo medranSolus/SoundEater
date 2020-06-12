@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     GameObject playerCamera;
     Rigidbody playerBody;
     Vector3 lastPosition;
-    bool dashEnable = false;
+    public bool dashEnable = false;
     public bool isDashPossible = true;
     public float timeSinceDash = 0.0f;
 

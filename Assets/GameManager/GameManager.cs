@@ -222,9 +222,19 @@ public class GameManager : MonoBehaviour
 
     public float GetTimeSinceDash()
     {
+        bool isDashPossible = spawnedPlayer.GetComponentInChildren<PlayerMovement>().isDashPossible;
+        bool dashEnable = spawnedPlayer.GetComponentInChildren<PlayerMovement>().dashEnable;
         if (isGame == false)
             return 0;
-        return spawnedPlayer.GetComponentInChildren<PlayerMovement>().timeSinceDash;
+        if(!dashEnable && !isDashPossible)
+        {
+            return spawnedPlayer.GetComponentInChildren<PlayerMovement>().timeSinceDash;
+        }
+        else
+        {
+            return 0;
+        }
+        
     }
 
     public float GetDashInterval()
