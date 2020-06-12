@@ -92,8 +92,11 @@ public class PlayerMovement : MonoBehaviour
     {
         float velocityForward = Input.GetAxis("Vertical");
         float velocitySide = Input.GetAxis("Horizontal") * 0.9999998f;
+
         if ((Mathf.Abs(velocityForward) + Mathf.Abs(velocitySide)) != 0.0f)
             velocitySide /= strafeScale;
-        playerBody.velocity = moveSpeed * (velocityForward * forward + velocitySide * (Quaternion.AngleAxis(90, Vector3.up) * forward));
+        
+        Vector3 movement = moveSpeed * (velocityForward * forward + velocitySide * (Quaternion.AngleAxis(90, Vector3.up) * forward));
+        playerBody.velocity = new Vector3(movement.x, playerBody.velocity.y + movement.y, movement.z);
     }
 }
