@@ -65,22 +65,29 @@ public class PreyControllerWaypoints : MonoBehaviour
             GotoNextPoint();
         if (runningAway == true)
         {
-            _agent.speed = 9;
+            _agent.speed = 6;
             if (!_agent.hasPath)
                 runningAway = false;
+            // footsteps
+            if ((transform.position - lastPosition).magnitude > 1)
+            {
+                soundChanger.PlayFootstep();
+                lastPosition = transform.position;
+            }
 
         }
         if(runningAway == false)
         {
             _agent.speed = 2;
+            // footsteps
+            if ((transform.position - lastPosition).magnitude > 2)
+            {
+                soundChanger.PlayFootstep();
+                lastPosition = transform.position;
+            }
         }
 
-        // footsteps
-        if ((transform.position - lastPosition).magnitude > 2)
-        {
-            soundChanger.PlayFootstep();
-            lastPosition = transform.position;
-        }
+        
     }
 
     // On collision the object this script is attached to
