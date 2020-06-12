@@ -32,6 +32,11 @@ public class ProgressBarHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(maximum == 0)
+        {
+            maximum = (int)(gameManager.GetDashInterval() * multiplier);
+        }
+        
         current = (int)(gameManager.GetTimeSinceDash()*multiplier);
         GetCurrentFill();
     }
