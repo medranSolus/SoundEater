@@ -13,11 +13,15 @@ public class MainMenuController : MonoBehaviour
         volume.value = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
     }
 
-    public void PlayGame()
+    public void UpdateVolume()
     {
         PlayerPrefs.SetFloat("MasterVolume", volume.value);
         PlayerPrefs.Save();
+    }
 
+    public void PlayGame()
+    {
+        UpdateVolume();
         SceneManager.LoadScene(1);
     }
 
