@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int AmountOfPrey;
     public float RoundTimeInSeconds;
     public GameObject UserInterface;
+    public Slider VolumeSlider;
 
     // Private variables to watch over game progress
     private List<GameObject> SpawnPositions = new List<GameObject>();
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        VolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
         SpawnPositions = new List<GameObject>(GameObject.FindGameObjectsWithTag("Respawn"));
 
         RestartGame();
@@ -56,6 +59,12 @@ public class GameManager : MonoBehaviour
                 EndGame();
             }
         }
+    }
+
+    public void UpdateVolume()
+    {
+        PlayerPrefs.SetFloat("MasterVolume", VolumeSlider.value);
+        PlayerPrefs.Save();
     }
 
     // Go through a procedure of restaring the game
@@ -168,6 +177,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("- - GAME OVER - -");
         Destroy(spawnedPlayer);
 
+        PlayerPrefs.SetInt("LastScore", currentScore);
         SceneManager.LoadScene(2);
     }
 
@@ -218,5 +228,29 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return spawnedPlayer.GetComponentInChildren<PlayerMovement>().isDashPossible;
+    }
+
+    public float GetTimeSinceDash()
+    {
+        bool isDashPossible = spawnedPlayer.GetComponentInChildren<PlayerMovement>().isDashPossible;
+        bool dashEnable = spawnedPlayer.GetComponentInChildren<PlayerMovement>().dashEnable;
+        if (isGame == false)
+            return 0;
+        if(!dashEnable && !isDashPossible)
+        {
+            return spawnedPlayer.GetComponentInChildren<PlayerMovement>().timeSinceDash;
+        }
+        else
+        {
+            return 0;
+        }
+        
+    }
+
+    public float GetDashInterval()
+    {
+        if (isGame == false)
+            return 0;
+        return spawnedPlayer.GetComponentInChildren<PlayerMovement>().dashInterval;
     }
 }

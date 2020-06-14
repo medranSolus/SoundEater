@@ -15,7 +15,7 @@ public class PreyControllerWaypoints : MonoBehaviour
     private bool runningAway; // if 0 - go to the waypoint, 1 - run from the player
     public GameManager gameManager;
 
-    public float EnemyDistanceRun = 4.0f; // distance describing when to run from the player
+    public float EnemyDistanceRun = 5.0f;
 
     private StepSoundChanger soundChanger = null;
     private Vector3 lastPosition;
@@ -55,26 +55,39 @@ public class PreyControllerWaypoints : MonoBehaviour
         {
             runningAway = true;
             Debug.Log("Player too close");
-        }
-        else
-            runningAway = false;
-
-        if (!_agent.pathPending && _agent.remainingDistance < 0.5f && runningAway == false)
-            GotoNextPoint();
-        else if (runningAway == true)
-        {
             Debug.Log("Running away");
             Vector3 dirToPlayer = transform.position - Player.transform.position;
-            Vector3 newPos = transform.position + dirToPlayer;
+            Vector3 newPos = transform.position + 5*dirToPlayer;
             _agent.SetDestination(newPos);
         }
 
-        // footsteps
-        if ((transform.position - lastPosition).magnitude > 3)
+        if (!_agent.pathPending && _agent.remainingDistance < 0.5f && runningAway == false)
+            GotoNextPoint();
+        if (runningAway == true)
         {
-            soundChanger.PlayFootstep();
-            lastPosition = transform.position;
+            _agent.speed = 6;
+            if (!_agent.hasPath)
+                runningAway = false;
+            // footsteps
+            if ((transform.position - lastPosition).magnitude > 1)
+            {
+                soundChanger.PlayFootstep();
+                lastPosition = transform.position;
+            }
+
         }
+        if(runningAway == false)
+        {
+            _agent.speed = 2;
+            // footsteps
+            if ((transform.position - lastPosition).magnitude > 2)
+            {
+                soundChanger.PlayFootstep();
+                lastPosition = transform.position;
+            }
+        }
+
+        
     }
 
     // On collision the object this script is attached to

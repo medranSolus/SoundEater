@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float strafeScale = Mathf.Sqrt(3.0f);
     [SerializeField]
-    float dashInterval = 5.0f;
+    public float dashInterval = 5.0f;
     [SerializeField]
     float dashTime = 0.7f;
     [SerializeField]
@@ -24,9 +24,9 @@ public class PlayerMovement : MonoBehaviour
     GameObject playerCamera;
     Rigidbody playerBody;
     Vector3 lastPosition;
-    bool dashEnable = false;
+    public bool dashEnable = false;
     public bool isDashPossible = true;
-    float timeSinceDash = 0.0f;
+    public float timeSinceDash = 0.0f;
 
     private StepSoundChanger soundChanger = null;
 
@@ -92,8 +92,11 @@ public class PlayerMovement : MonoBehaviour
     {
         float velocityForward = Input.GetAxis("Vertical");
         float velocitySide = Input.GetAxis("Horizontal") * 0.9999998f;
+
         if ((Mathf.Abs(velocityForward) + Mathf.Abs(velocitySide)) != 0.0f)
             velocitySide /= strafeScale;
-        playerBody.velocity = moveSpeed * (velocityForward * forward + velocitySide * (Quaternion.AngleAxis(90, Vector3.up) * forward));
+        
+        Vector3 movement = moveSpeed * (velocityForward * forward + velocitySide * (Quaternion.AngleAxis(90, Vector3.up) * forward));
+        playerBody.velocity = new Vector3(movement.x, playerBody.velocity.y + movement.y, movement.z);
     }
 }
