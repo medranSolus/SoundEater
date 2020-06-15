@@ -10,6 +10,12 @@ public class PreyControllerWaypoints : MonoBehaviour
 
     private NavMeshAgent _agent;
     private GameObject Player;
+
+    private GameObject LeftHand;
+    public Animator LeftAnimator;
+    private GameObject RightHand;
+    public Animator RightAnimator;
+
     private GameObject[] waypoints; // array of waypoints
     private int destPoint = 0;
     private bool runningAway; // if 0 - go to the waypoint, 1 - run from the player
@@ -35,6 +41,11 @@ public class PreyControllerWaypoints : MonoBehaviour
         // search player object by tag
         Player = GameObject.FindGameObjectWithTag("Player");
 
+        GameObject PlayerCamera = Player.transform.GetChild(0).gameObject;
+        LeftHand = PlayerCamera.transform.GetChild(1).gameObject;
+        LeftAnimator = LeftHand.GetComponent<Animator>();
+        RightHand = PlayerCamera.transform.GetChild(0).gameObject;
+        RightAnimator = RightHand.GetComponent<Animator>();
         // search waypoints by tag
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
         Debug.Log("Loaded waypoints:");
@@ -96,6 +107,8 @@ public class PreyControllerWaypoints : MonoBehaviour
     {
         if (collision.collider.gameObject.CompareTag("Player"))
         {
+            LeftAnimator.SetTrigger("isAttacking");
+            RightAnimator.SetTrigger("isAttacking");
             Debug.Log("Collided with Player");
             Player.GetComponent<PlayerSound>().PlayAttack();
             gameManager.DeletePreyFromList(gameObject);
