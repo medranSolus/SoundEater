@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
                                           leftSpawnPoints[randomIndex].transform.position,
                                           leftSpawnPoints[randomIndex].transform.rotation);
             spawnedPrey.Add(Prey);
-            Prey.GetComponent<PreyControllerWaypoints>().gameManager = this; // passing reference to this gameManager to the spawned prey
+            Prey.GetComponent<PreyController>().gameManager = this; // passing reference to this gameManager to the spawned prey
             leftSpawnPoints.RemoveAt(randomIndex);
         }
     }

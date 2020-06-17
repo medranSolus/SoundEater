@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class PreyControllerWaypoints : MonoBehaviour
+public class PreyController : MonoBehaviour
 {
     // animations
     private Animator _animator;
@@ -21,7 +21,10 @@ public class PreyControllerWaypoints : MonoBehaviour
     private bool runningAway; // if 0 - go to the waypoint, 1 - run from the player
     public GameManager gameManager;
 
-    public float EnemyDistanceRun = 5.0f;
+    public float EnemyDistanceRun;
+    public float defaultSpeed;
+    public float runningSpeed;
+
 
     private StepSoundChanger soundChanger = null;
     private Vector3 lastPosition;
@@ -76,20 +79,20 @@ public class PreyControllerWaypoints : MonoBehaviour
             GotoNextPoint();
         if (runningAway == true)
         {
-            _agent.speed = 6;
+            _agent.speed = runningSpeed;
             if (!_agent.hasPath)
                 runningAway = false;
             // footsteps
-            if ((transform.position - lastPosition).magnitude > 1)
+            if ((transform.position - lastPosition).magnitude > 1.5)
             {
                 soundChanger.PlayFootstep();
                 lastPosition = transform.position;
             }
 
         }
-        if(runningAway == false)
+        else
         {
-            _agent.speed = 2;
+            _agent.speed = defaultSpeed;
             // footsteps
             if ((transform.position - lastPosition).magnitude > 2)
             {
